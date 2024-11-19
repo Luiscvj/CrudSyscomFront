@@ -1,0 +1,52 @@
+
+<mat-dialog-content>
+    <h4>Add a new Book!</h4>
+ <mat-form-field>
+    <mat-label> Title</mat-label>
+    <input matInput [(ngModel)]="data.bookTitle">
+ </mat-form-field>
+ 
+ <mat-form-field class="mx-4">
+    <mat-label>Genres</mat-label>
+    <mat-select [(ngModel)]="data.genres">
+            <mat-option [value]="1">Realismo Magico</mat-option>
+            <mat-option [value]="2">Fantasia</mat-option>
+            <mat-option [value]="3">Ficcion</mat-option>
+            <mat-option [value]="4">NoFiccion</mat-option>
+            <mat-option [value]="5">Terror</mat-option>
+    </mat-select>
+</mat-form-field> 
+
+ <mat-form-field>
+    <mat-label>Authors</mat-label>
+    <mat-select [(ngModel)]="data.authors">
+            <mat-option [value]="1">Gabriel Garcia Marquez</mat-option>
+            <mat-option [value]="2">Isabel Allende</mat-option>
+            <mat-option [value]="3">Jorge Luis Borges</mat-option>
+            <mat-option [value]="4">Mario Vargas Llosa</mat-option>
+            <mat-option [value]="5">Octavio Paz</mat-option>
+    </mat-select>
+</mat-form-field> 
+
+<!--  <mat-checkbox color="primary" [(ngModel)]="showAddRol">Añadir rol</mat-checkbox> -->
+
+<!-- @if(showAddRol)
+{
+ <mat-form-field>
+     <mat-label>Roles</mat-label>
+     <mat-select [(ngModel)]="userData.roleName">
+             <mat-option value="Administrador">Administrador</mat-option>
+             <mat-option value="Empleado">Empleado</mat-option>
+             <mat-option value="Gerente">Gerente</mat-option>
+     </mat-select>
+ </mat-form-field>  
+
+} -->
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+   <button mat-raised-button color="primary"  [mat-dialog-close]="data" cdkFocusInitial>save</button>
+   <button mat-raised-button color="warm" (click)="onNoClick()">close</button> 
+</mat-dialog-actions>

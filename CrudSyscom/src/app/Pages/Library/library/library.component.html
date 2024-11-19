@@ -1,5 +1,90 @@
 <div class="container text-center pt-5">
     <h2>App Libreria</h2>
     <hr>
-   
+    <div class="card cardUsers">
+        <div class="card-header">
+          
+          <div class="row  justify-content-md-center py-3">       
+            <div class="col-lg-2">
+                <button mat-raised-button color="primary"  class="me-2 w-100"  (click)="getAllBooks()">List </button>
+            </div> 
+            <div class="col-lg-2">
+                <button mat-raised-button color="primary" class="w-100"  (click)="searchBook()" >Search </button>
+            </div> 
+            <div class="col-lg-2">
+                <button mat-raised-button color="primary"  class="w-100"  (click)="addBook()">Add book </button>
+            </div>       
+          </div>
+            <form [formGroup]="options">
+                <div class="row">
+                    <div class="col ">                     
+                            <mat-form-field >
+                                <mat-label>Search</mat-label> 
+                                <input  formControlName="_keyWord" type="text" matInput>        
+                            </mat-form-field>
+                            <mat-radio-group [formControl]="typeOfSearch">
+                                <mat-radio-button value="title" [checked]="true">tile</mat-radio-button>
+                                <mat-radio-button value="author">author</mat-radio-button>
+                            </mat-radio-group>                                             
+                    </div>                              
+                </div>
+            </form>      
+        
+        <div class="card-body">
+            
+            <!-- Tabla -->
+            <table mat-table [dataSource]="booksList" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+                <ng-container matColumnDef="BookTitle">
+                  <th mat-header-cell *matHeaderCellDef> Title </th>
+                  <td mat-cell *matCellDef="let element"> {{element.bookTitle}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="Authors">
+                  <th mat-header-cell *matHeaderCellDef> Authors </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <ul >
+                        @for( author of element.authors; track author.authorId)
+                        {
+                            <li>{{author.authorName}}</li>
+
+                        }
+                     </ul> 
+                  </td>
+                </ng-container>
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="Genres">
+                  <th mat-header-cell *matHeaderCellDef> Genres </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <ul >
+                        @for( genre of element.genres; track genre.genreId)
+                        {
+                            <li>{{genre.genreName}}</li>
+
+                        }
+                     </ul> 
+                </td>
+                </ng-container>
+                <ng-container matColumnDef="Accion">
+                  <th mat-header-cell *matHeaderCellDef> </th>
+                  <td mat-cell *matCellDef="let element"> 
+                     <button mat-icon-button color="primary" (click)="updateBook(element)" >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warm" (click)="deleteBook(element.bookId)" >
+                        <mat-icon>delete</mat-icon>
+                    </button>                    
+                  </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+        </div>
+      </div>
+
 </div>
